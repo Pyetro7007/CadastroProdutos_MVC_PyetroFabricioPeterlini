@@ -10,6 +10,7 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
 const produtosRouter = require('./routes/produtos');
+const categoriasRouter = require('./routes/categorias');
 
 var app = express();
 
@@ -27,6 +28,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/produtos', produtosRouter);
+app.use('/categorias', categoriasRouter);
 
 app.use(function(req, res, next) {
   next(createError(404));

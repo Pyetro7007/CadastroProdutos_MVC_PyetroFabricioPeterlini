@@ -2,38 +2,52 @@
 
 <a href="/produtos/novo">Novo produto</a>
 
+<br><br>
+
+<form action="/produtos" method="GET">
+  <input type="text" name="busca" value="<%= busca %>" placeholder="Pesquisar por nome...">
+  <button type="submit">Buscar</button>
+  <% if (busca) { %>
+    <a href="/produtos">Limpar</a>
+  <% } %>
+</form>
+
+<br>
+
 <table border="1">
+  <tr>
+    <th>Nome</th>
+    <th>Preço</th>
+    <th>Quantidade</th>
+    <th>Categoria</th>
+    <th>Ações</th>
+  </tr>
+
+  <% if (produtos.length === 0) { %>
     <tr>
-        <th>Nome</th>
-        <th>Preço</th>
-        <th>Quantidade</th>
-        <th>Ações</th>
+      <td colspan="5">Nenhum produto encontrado.</td>
     </tr>
+  <% } %>
 
-    <% produtos.forEach(p => { %>
+  <% produtos.forEach(p => { %>
+    <tr>
+      <td><%= p.nome %></td>
+      <td><%= p.preco %></td>
+      <td><%= p.quantidade %></td>
+      <td><%= p.Categorium ? p.Categorium.nome : '—' %></td>
 
-        <tr>
-            <td><%= p.nome %></td>
-            <td><%= p.preco %></td>
-            <td><%= p.quantidade %></td>
+      <td>
+        <a href="/produtos/<%= p.id %>/editar">Editar</a>
 
-            <td>
-                <a href="/produtos/<%= p.id %>/editar">
-                    Editar
-                </a>
-
-                <form
-                    action="/produtos/<%= p.id %>/deletar"
-                    method="POST"
-                    style="display:inline"
-                >
-                    <button type="submit">
-                        Excluir
-                    </button>
-                </form>
-            </td>
-        </tr>
-
-    <% }) %>
+        <form
+          action="/produtos/<%= p.id %>/deletar"
+          method="POST"
+          style="display:inline"
+        >
+          <button type="submit">Excluir</button>
+        </form>
+      </td>
+    </tr>
+  <% }) %>
 
 </table>

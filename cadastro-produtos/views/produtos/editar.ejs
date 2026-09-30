@@ -2,36 +2,32 @@
 
 <form action="/produtos/<%= produto.id %>" method="POST">
 
-    <label>Nome:</label>
-    <input
-        type="text"
-        name="nome"
-        value="<%= produto.nome %>"
-    >
+  <label>Nome:</label>
+  <input type="text" name="nome" value="<%= produto.nome %>">
 
-    <br>
+  <br>
 
-    <label>Preço:</label>
-    <input
-        type="number"
-        name="preco"
-        step="0.01"
-        value="<%= produto.preco %>"
-    >
+  <label>Preço:</label>
+  <input type="number" name="preco" step="0.01" value="<%= produto.preco %>">
 
-    <br>
+  <br>
 
-    <label>Quantidade:</label>
-    <input
-        type="number"
-        name="quantidade"
-        value="<%= produto.quantidade %>"
-    >
+  <label>Quantidade:</label>
+  <input type="number" name="quantidade" value="<%= produto.quantidade %>">
 
-    <br>
+  <br>
 
-    <button type="submit">
-        Atualizar
-    </button>
+  <label>Categoria:</label>
+  <select name="categoriaId">
+    <% categorias.forEach(c => { %>
+      <option value="<%= c.id %>" <%= c.id === produto.categoriaId ? 'selected' : '' %>>
+        <%= c.nome %>
+      </option>
+    <% }) %>
+  </select>
+
+  <br>
+
+  <button type="submit">Atualizar</button>
 
 </form>
